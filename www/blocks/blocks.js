@@ -10146,23 +10146,21 @@ EJS.Helpers.prototype = {
 
   $page.append(App.View.make('landing'));
 
-  $page.find('[data-elasticsearch]').each(function(){
+  $page.find('[data-collection-view]').each(function(){
 
     var $region = $(this),
 
-        request = JSON.parse($region.attr('data-elasticsearch')),
+      request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
 
-        renderRegion = function(apps, textStatus, jqXHR){
-          $ul = $(document.createElement('ul'))
-          $.each(apps, function(){
-            $(document.createElement('li')).html(JSON.stringify(this)).appendTo($ul)
-          })
-          $region.html($ul);
-        },
+      viewName = $region.attr('data-collection-view'),
 
-        throwError = function(jqXHR, textStatus, errorThrown){
-          console.error(errorThrown)
-        }
+      renderRegion = function(apps, textStatus, jqXHR){
+        $region.html(App.View.make('collection/'+viewName, {"apps":apps}));
+      },
+
+      throwError = function(jqXHR, textStatus, errorThrown){
+        console.error(errorThrown)
+      }
 
     request.fields = ['identity','attributes']; // TODO: figure out why this isn't working
 
@@ -10176,7 +10174,10 @@ EJS.Helpers.prototype = {
 };
 ;var Engine = {};;
 ;Engine.Config = {
-    url: 'http://localhost:9292'
+  url: 'http://localhost:9292',
+  Search: {
+    type: 'elasticsearch'
+  }
 };;
 ;Engine.Route = {
   to: function(path){
