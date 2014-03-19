@@ -1,17 +1,26 @@
 Engine.Search = {
 
-  __base__: function(type, options){
-    $.ajax($.extend({}, options, {
+  __base__: function(suffix, options){
+
+    if(!suffix) suffix = '';
+
+    options = {
       type: 'GET',
-      url: Engine.Route.to('/local/payloads/_'+type),
+      url: Engine.Route.to('/local/payloads'+suffix),
       accepts: 'application/json',
-      contentType: 'application/json',
       crossDomain: true,
-      dataType: 'json',
-      body: options.request,
       success: options.success,
       error: options.error
-    }));
+    };
+
+    if(options.request){
+      options.contentType = 'application/json';
+      options.data = options.request;
+      options.dataType = 'json';
+    }
+
+    $.ajax(options);
+
   }
 
 }

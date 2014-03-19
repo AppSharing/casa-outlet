@@ -23,9 +23,6 @@
         </nav>
 
         <main>
-            <nav data-elasticsearch='{"query":{"match_all":{}}}'>
-
-            </nav>
         </main>
 
         <footer>
@@ -33,38 +30,7 @@
         </footer>
 
         <script type="text/javascript">
-
-            var showIn = function(selector){
-                    var $selector = $(selector);
-                    return function(apps, textStatus, jqXHR){
-                        $ul = $(document.createElement('ul'))
-                        $.each(apps, function(){
-                            $(document.createElement('li'))
-                                .html(JSON.stringify(this))
-                                .appendTo($ul)
-                        })
-                        $selector.html($ul);
-                    }
-                },
-                showError = function(jqXHR, textStatus, errorThrown){
-                    // TODO: replace with actual error presentation
-                }
-
-            $('[data-elasticsearch]').each(function(){
-
-                var $this = $(this),
-                    request = JSON.parse($this.attr('data-elasticsearch'));
-
-                // TODO: figure out why this isn't working
-                request.fields = ['identity','attributes'];
-
-                Engine.Search.elasticsearch({
-                    request: request,
-                    success: showIn($this),
-                    error: showError
-                })
-            })
-
+            App.start();
         </script>
 
     </body>
