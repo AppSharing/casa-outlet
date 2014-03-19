@@ -1,0 +1,17 @@
+/* line 3, ../../../bower_components/efx/src/driver/accordion.css */
+[data-accordion~="basic"][data-accordion~="hide"],
+[data-accordion~="basic"] [data-accordion~="hide"] {
+  display: none;
+}
+
+/* line 3, ../../../bower_components/efx/src/driver/tabs.css */
+[data-tabs~="basic"][data-tabs~="hide"],
+[data-tabs~="basic"] [data-tabs~="hide"] {
+  display: none;
+}
+
+/* line 3, ../../../bower_components/efx/src/driver/toggle.css */
+[data-toggle~="basic"][data-toggle~="hide"],
+[data-toggle~="basic"] [data-toggle~="hide"] {
+  display: none;
+}

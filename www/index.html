@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>CASA Outlet</title>
+        <link rel="stylesheet" href="blocks/blocks.css">
+        <script type="text/javascript" src="blocks/blocks.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>CASA Outlet</h1>
+        </header>
+
+        <nav>
+            <form action="#" method="POST" id="search-form">
+                <label for="search">Search Content</label>
+                <input type="search" id="search">
+            </form>
+        </nav>
+
+        <main>
+            <nav data-elasticsearch='{"query":{"match_all":{}}}'>
+
+            </nav>
+        </main>
+
+        <footer>
+            Footer goes here.
+        </footer>
+
+        <script type="text/javascript">
+
+            var showIn = function(selector){
+                    var $selector = $(selector);
+                    return function(apps, textStatus, jqXHR){
+                        $ul = $(document.createElement('ul'))
+                        $.each(apps, function(){
+                            $(document.createElement('li'))
+                                .html(JSON.stringify(this))
+                                .appendTo($ul)
+                        })
+                        $selector.html($ul);
+                    }
+                },
+                showError = function(jqXHR, textStatus, errorThrown){
+                    // TODO: replace with actual error presentation
+                }
+
+            $('[data-elasticsearch]').each(function(){
+
+                var $this = $(this),
+                    request = JSON.parse($this.attr('data-elasticsearch'));
+
+                // TODO: figure out why this isn't working
+                request.fields = ['identity','attributes'];
+
+                Engine.Search.elasticsearch({
+                    request: request,
+                    success: showIn($this),
+                    error: showError
+                })
+            })
+
+        </script>
+
+    </body>
+
+</html>

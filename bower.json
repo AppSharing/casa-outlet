@@ -1,0 +1,34 @@
+{
+  "name": "casa-outlet",
+  "description": "Generic outlet for the CASA reference implementation",
+  "version": "0.0.1",
+  "authors": [
+    { "name": "Eric Bollens", "email": "eric@eb.io"," homepage": "http://eb.io" }
+  ],
+  "keywords": [
+    "casa",
+    "app",
+    "sharing",
+    "store",
+    "interoperability"
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AppSharing/casa-outlet.git"
+  },
+  "main": [
+    "www/*"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "efx": "~0.2.4",
+    "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git#2.1.0"
+  },
+  "devDependencies": {
+  }
+}
