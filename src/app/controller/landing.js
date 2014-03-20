@@ -20,7 +20,7 @@ App.Controller.landing = function(){
         console.error(errorThrown)
       }
 
-    request.fields = ['identity','attributes']; // TODO: figure out why this isn't working
+    request._source = ['identity','attributes'];
 
     Engine.Search.elasticsearch({
       request: request,

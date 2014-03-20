@@ -2,11 +2,9 @@ Engine.Search = {
 
   __base__: function(suffix, options){
 
-    if(!suffix) suffix = '';
-
-    options = {
+    ajaxOptions = {
       type: 'GET',
-      url: Engine.Route.to('/local/payloads'+suffix),
+      url: Engine.Route.to('/local/payloads'+(suffix?suffix:'')),
       accepts: 'application/json',
       crossDomain: true,
       success: options.success,
@@ -14,12 +12,13 @@ Engine.Search = {
     };
 
     if(options.request){
-      options.contentType = 'application/json';
-      options.data = options.request;
-      options.dataType = 'json';
+      ajaxOptions.contentType = 'application/json';
+      ajaxOptions.data = 'body='+encodeURIComponent(JSON.stringify(options.request));
+      ajaxOptions.dataType = 'json';
     }
 
-    $.ajax(options);
+    $.ajax(ajaxOptions);
+
 
   }
 
