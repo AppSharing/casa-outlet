@@ -1,0 +1,15 @@
+<nav>
+    <form action="#" method="POST" data-type="query" data-result-view="list">
+        <label for="search">Search All</label>
+        <input type="search" id="search">
+        <input type="submit">
+    </form>
+</nav>
+
+<ul>
+    <% for(var i=0; i<apps.length; i++) { %>
+    <li>
+        <%= JSON.stringify(apps[i]) %>
+    </li>
+    <% } %>
+</ul>

@@ -9620,20 +9620,33 @@ return jQuery;
 
 ;
 ;App = {
+
   start: function(){
-    App.execute(App.Controller.landing)
+    App.execute(App.Controller.Landing)
   },
+
   execute: function(controller){
-    var $main = $('main');
+
+    var args = Array.prototype.slice.call(arguments),
+        controllerClass = args.shift(),
+        controllerArgs = args,
+        $main = $('main');
+
     $main.html('');
-    controller.call($main);
+    controllerClass.execute.apply($main, controllerArgs);
+
   },
+
   View: {
+
     make: function(name, data){
       return new EJS({url: 'views/'+name+'.ejs'}).render(data ? data : {})
     }
+
   },
+
   Controller: {}
+
 };;
 ;(function(){
     
@@ -10140,18 +10153,66 @@ EJS.Helpers.prototype = {
 
 
 })();;
-;App.Controller.landing = function(){
+;App.Controller.Landing = {
 
-  var $page = $(this);
+  execute: function(){
 
-  $page.append(App.View.make('landing'));
+    var $page = $(this);
 
-  $page.find('[data-collection-view]').each(function(){
+    $page.append(App.View.make('landing'));
+
+    App.Controller.Query.attachToForm($page.find('form[data-type="query"]'));
+
+    $page.find('[data-type="search"]').each(function(){
+      App.Controller.SearchCollection.attachTo(this);
+    });
+
+  }
+
+};
+;App.Controller.Query = {
+
+  execute: function(queryString, resultViewName){
 
     var $region = $(this),
 
-      request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
+        renderRegion = function(apps, textStatus, jqXHR){
+          $region.html(App.View.make('results', {"apps":apps}));
+          App.Controller.Query.attachToForm($region.find('form[data-type="query"]'));
+        },
 
+        throwError = function(jqXHR, textStatus, errorThrown){
+          console.error(errorThrown)
+        }
+
+    Engine.Search.query(queryString, {
+      success: renderRegion,
+      error: throwError
+    })
+
+  },
+
+  attachToForm: function(form){
+
+    var $form = $(form);
+    $form.submit(function(e){
+      e.preventDefault();
+      App.execute(
+        App.Controller.Query,
+        $form.find('[type="search"]').val()
+      );
+    })
+
+  }
+
+};
+;App.Controller.SearchCollection = {
+
+  attachTo: function(region){
+
+    var $region = $(region),
+
+      request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
       viewName = $region.attr('data-collection-view'),
 
       renderRegion = function(apps, textStatus, jqXHR){
@@ -10162,14 +10223,15 @@ EJS.Helpers.prototype = {
         console.error(errorThrown)
       }
 
-    request.fields = ['identity','attributes']; // TODO: figure out why this isn't working
+    request._source = ['identity','attributes'];
 
     Engine.Search.elasticsearch({
       request: request,
       success: renderRegion,
       error: throwError
     })
-  })
+
+  }
 
 };
 ;var Engine = {};;
@@ -10188,11 +10250,9 @@ EJS.Helpers.prototype = {
 
   __base__: function(suffix, options){
 
-    if(!suffix) suffix = '';
-
-    options = {
+    ajaxOptions = {
       type: 'GET',
-      url: Engine.Route.to('/local/payloads'+suffix),
+      url: Engine.Route.to('/local/payloads'+(suffix?suffix:'')),
       accepts: 'application/json',
       crossDomain: true,
       success: options.success,
@@ -10200,12 +10260,13 @@ EJS.Helpers.prototype = {
     };
 
     if(options.request){
-      options.contentType = 'application/json';
-      options.data = options.request;
-      options.dataType = 'json';
+      ajaxOptions.contentType = 'application/json';
+      ajaxOptions.data = 'body='+encodeURIComponent(JSON.stringify(options.request));
+      ajaxOptions.dataType = 'json';
     }
 
-    $.ajax(options);
+    $.ajax(ajaxOptions);
+
 
   }
 

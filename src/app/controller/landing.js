@@ -1,32 +1,17 @@
-App.Controller.landing = function(){
+App.Controller.Landing = {
 
-  var $page = $(this);
+  execute: function(){
 
-  $page.append(App.View.make('landing'));
+    var $page = $(this);
 
-  $page.find('[data-collection-view]').each(function(){
+    $page.append(App.View.make('landing'));
 
-    var $region = $(this),
+    App.Controller.Query.attachToForm($page.find('form[data-type="query"]'));
 
-      request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
+    $page.find('[data-type="search"]').each(function(){
+      App.Controller.SearchCollection.attachTo(this);
+    });
 
-      viewName = $region.attr('data-collection-view'),
-
-      renderRegion = function(apps, textStatus, jqXHR){
-        $region.html(App.View.make('collection/'+viewName, {"apps":apps}));
-      },
-
-      throwError = function(jqXHR, textStatus, errorThrown){
-        console.error(errorThrown)
-      }
-
-    request._source = ['identity','attributes'];
-
-    Engine.Search.elasticsearch({
-      request: request,
-      success: renderRegion,
-      error: throwError
-    })
-  })
+  }
 
 }

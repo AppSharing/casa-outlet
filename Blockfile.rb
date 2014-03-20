@@ -22,6 +22,8 @@ block 'casa-outlet', :path => 'src' do |outlet|
       dependency app.route 'core'
       dependency framework.route 'ejs_production'
       js_file 'landing.js'
+      js_file 'query.js'
+      js_file 'search_collection.js'
     end
 
   end
