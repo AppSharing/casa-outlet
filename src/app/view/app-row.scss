@@ -1,0 +1,43 @@
+.app-row {
+
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  border-width: 1px 0;
+
+  a {
+    margin: 10px 20px 10px 0;
+    display: block;
+    color: #666;
+    float: left;
+  }
+
+  h2 {
+    margin: 0;
+    color: #222;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @extend .clearfix;
+  }
+
+  .icon {
+    margin: 0 auto 10px;
+  }
+
+  figure {
+    padding: 0;
+
+    figcaption {
+      @extend small;
+      text-align: center;
+    }
+
+  }
+
+}

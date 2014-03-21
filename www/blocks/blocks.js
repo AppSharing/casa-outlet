@@ -9619,35 +9619,9 @@ return jQuery;
 })(jQuery);
 
 ;
-;App = {
-
-  start: function(){
-    App.execute(App.Controller.Landing)
-  },
-
-  execute: function(controller){
-
-    var args = Array.prototype.slice.call(arguments),
-        controllerClass = args.shift(),
-        controllerArgs = args,
-        $main = $('main');
-
-    $main.html('');
-    controllerClass.execute.apply($main, controllerArgs);
-
-  },
-
-  View: {
-
-    make: function(name, data){
-      return new EJS({url: 'views/'+name+'.ejs'}).render(data ? data : {})
-    }
-
-  },
-
-  Controller: {}
-
-};;
+;var escapeAttributeValue = function(str){
+  return str.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+};
 ;(function(){
     
 
@@ -10153,6 +10127,132 @@ EJS.Helpers.prototype = {
 
 
 })();;
+;function strip_tags(input, allowed) {
+  //  discuss at: http://phpjs.org/functions/strip_tags/
+  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // improved by: Luke Godfrey
+  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  //    input by: Pul
+  //    input by: Alex
+  //    input by: Marc Palau
+  //    input by: Brett Zamir (http://brett-zamir.me)
+  //    input by: Bobby Drake
+  //    input by: Evertjan Garretsen
+  // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // bugfixed by: Onno Marsman
+  // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // bugfixed by: Eric Nagel
+  // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // bugfixed by: Tomasz Wesolowski
+  //  revised by: Rafał Kukawski (http://blog.kukawski.pl/)
+  //   example 1: strip_tags('<p>Kevin</p> <br /><b>van</b> <i>Zonneveld</i>', '<i><b>');
+  //   returns 1: 'Kevin <b>van</b> <i>Zonneveld</i>'
+  //   example 2: strip_tags('<p>Kevin <img src="someimage.png" onmouseover="someFunction()">van <i>Zonneveld</i></p>', '<p>');
+  //   returns 2: '<p>Kevin van Zonneveld</p>'
+  //   example 3: strip_tags("<a href='http://kevin.vanzonneveld.net'>Kevin van Zonneveld</a>", "<a>");
+  //   returns 3: "<a href='http://kevin.vanzonneveld.net'>Kevin van Zonneveld</a>"
+  //   example 4: strip_tags('1 < 5 5 > 1');
+  //   returns 4: '1 < 5 5 > 1'
+  //   example 5: strip_tags('1 <br/> 1');
+  //   returns 5: '1  1'
+  //   example 6: strip_tags('1 <br/> 1', '<br>');
+  //   returns 6: '1 <br/> 1'
+  //   example 7: strip_tags('1 <br/> 1', '<br><br/>');
+  //   returns 7: '1 <br/> 1'
+
+  allowed = (((allowed || '') + '')
+    .toLowerCase()
+    .match(/<[a-z][a-z0-9]*>/g) || [])
+    .join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+  return input.replace(commentsAndPhpTags, '')
+    .replace(tags, function ($0, $1) {
+      return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+    });
+};
+;App = {
+
+  start: function(){
+
+    App.execute(App.Controller.Landing)
+
+  },
+
+  execute: function(controller){
+
+    var args = Array.prototype.slice.call(arguments),
+        controllerClass = args.shift(),
+        controllerArgs = args,
+        $main = $('main');
+
+    $main.html('');
+    controllerClass.execute.apply($main, controllerArgs);
+
+    App.applyConfigData();
+
+  },
+
+  applyConfigData: function(){
+
+    $('[data-from-config]').each(function(){
+      var $this = $(this),
+        value = App.Config[$this.attr('data-from-config')];
+
+      if(value)
+        $this.html(value)
+    })
+
+  },
+
+  View: {
+
+    make: function(name, data){
+      return new EJS({url: 'view/'+name+'.ejs'}).render(data ? data : {})
+    }
+
+  },
+
+  Controller: {}
+
+};;
+;App.Config = {
+  title: 'CASA',
+  footer: '[[Copyright Notice Here]]'
+};;
+;var Engine = {};;
+;Engine.Config = {
+  url: 'http://localhost:9292',
+  Search: {
+    type: 'elasticsearch'
+  }
+};;
+;App.Controller.Details = {
+
+  attachTo: function(region){
+
+    var $region = $(region);
+
+    $region.click(function(){
+
+      $('main > *').hide();
+
+      $('main').prepend(App.View.make('app-details', {
+        "app":JSON.parse($region.attr('data-app-details'))
+      }));
+
+      $('main .app-details [data-action="close"]').click(function(e){
+        e.preventDefault();
+        $(this).closest('.app-details').remove();
+        $('main > *').show();
+      })
+
+    })
+
+  }
+
+};
 ;App.Controller.Landing = {
 
   execute: function(){
@@ -10177,8 +10277,11 @@ EJS.Helpers.prototype = {
     var $region = $(this),
 
         renderRegion = function(apps, textStatus, jqXHR){
-          $region.html(App.View.make('results', {"apps":apps}));
+          $region.html(App.View.make('results-list', {"apps":apps}));
           App.Controller.Query.attachToForm($region.find('form[data-type="query"]'));
+          $region.find('[data-app-details]').each(function(){
+            App.Controller.Details.attachTo(this);
+          })
         },
 
         throwError = function(jqXHR, textStatus, errorThrown){
@@ -10213,10 +10316,21 @@ EJS.Helpers.prototype = {
     var $region = $(region),
 
       request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
-      viewName = $region.attr('data-collection-view'),
+      viewName = $region.attr('data-view'),
+      title = $region.attr('data-title')
 
       renderRegion = function(apps, textStatus, jqXHR){
-        $region.html(App.View.make('collection/'+viewName, {"apps":apps}));
+        $region.append(App.View.make(viewName, {"apps":apps,"title":title}));
+        $region.find('[data-app-details]').each(function(){
+          App.Controller.Details.attachTo(this);
+        })
+        $region.find('.scrollable ul:not(.one-line)').each(function(){
+          var $this = $(this), width = 0;
+          $this.find('> li > *').each(function(){
+            width += $(this).outerWidth(true);
+          })
+          $this.css('width', width);
+        });
       },
 
       throwError = function(jqXHR, textStatus, errorThrown){
@@ -10234,13 +10348,6 @@ EJS.Helpers.prototype = {
   }
 
 };
-;var Engine = {};;
-;Engine.Config = {
-  url: 'http://localhost:9292',
-  Search: {
-    type: 'elasticsearch'
-  }
-};;
 ;Engine.Route = {
   to: function(path){
     return Engine.Config.url + path;

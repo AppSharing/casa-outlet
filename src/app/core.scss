@@ -1,0 +1,72 @@
+a {
+  text-decoration: none;
+  color: #005580;
+  &:hover {
+    color: #116690;
+  }
+}
+
+body {
+
+  background-color: #f0f0f0;
+  margin: 20px;
+  font-size: 0.85em;
+
+  > header {
+    margin-bottom: 15px;
+  }
+
+  > main > nav, > main > section, > footer {
+    margin-bottom: 20px;
+  }
+
+  > main {
+    position: relative;
+  }
+
+  >header, > footer {
+    text-align: center;
+  }
+
+  > header h1 {
+    margin: 0;
+  }
+
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.15em;
+}
+
+figure {
+  margin: 0;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.hide-accessible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.float-right {
+  float: right;
+}

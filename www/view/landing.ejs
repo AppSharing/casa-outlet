@@ -1,0 +1,13 @@
+<nav>
+    <form action="#" method="POST" data-type="query">
+        <label for="search">Search All</label>
+        <input type="search" id="search">
+        <input type="submit" value="⚲" style="-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg);">
+    </form>
+</nav>
+
+<nav data-type="search"
+     data-elasticsearch='{"query":{"match_all":{}},"size":20}'
+     data-view="collection-row"
+     data-title="Collection">
+</nav>

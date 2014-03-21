@@ -1,0 +1,81 @@
+<nav>
+    <form action="#" method="POST" data-type="query" data-result-view="list">
+        <label for="search">Search All</label>
+        <input type="search" id="search">
+        <input type="submit" value="⚲" style="-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg);">
+    </form>
+</nav>
+
+<div class="app-list">
+
+    <h2>Search Results</h2>
+
+    <% if(apps.length > 0){ %>
+    <ul>
+        <% for(var i=0; i<apps.length; i++) { %>
+        <li>
+            <a href="#" data-app-details='<%= escapeAttributeValue(JSON.stringify(apps[i])) %>'>
+                <figure>
+                    <div class="icon"></div>
+                    <figcaption>
+                        <header>
+                            <h4><%= apps[i].attributes.use.title ? apps[i].attributes.use.title : 'Untitled' %></h4>
+                            <% if(apps[i].attributes.use.author){ %>
+                            <%= $.map(apps[i].attributes.use.author, function(author){
+                                return author.name ? author.name : 'Anonymous';
+                            }).join(', ') %>
+                            <% } %>
+                        </header>
+                        <% if(apps[i].attributes.use.description){ %>
+                        <p><em><%= apps[i].attributes.use.description %></em></p>
+                        <% } %>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-app-details='<%= escapeAttributeValue(JSON.stringify(apps[i])) %>'>
+                <figure>
+                    <div class="icon"></div>
+                    <figcaption>
+                        <header>
+                            <h4><%= apps[i].attributes.use.title ? apps[i].attributes.use.title : 'Untitled' %></h4>
+                            <% if(apps[i].attributes.use.author){ %>
+                            <%= $.map(apps[i].attributes.use.author, function(author){
+                                return author.name ? author.name : 'Anonymous';
+                            }).join(', ') %>
+                            <% } %>
+                        </header>
+                        <% if(apps[i].attributes.use.description){ %>
+                        <p><em><%= apps[i].attributes.use.description %></em></p>
+                        <% } %>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-app-details='<%= escapeAttributeValue(JSON.stringify(apps[i])) %>'>
+                <figure>
+                    <div class="icon"></div>
+                    <figcaption>
+                        <header>
+                            <h4><%= apps[i].attributes.use.title ? apps[i].attributes.use.title : 'Untitled' %></h4>
+                            <% if(apps[i].attributes.use.author){ %>
+                            <%= $.map(apps[i].attributes.use.author, function(author){
+                                return author.name ? author.name : 'Anonymous';
+                            }).join(', ') %>
+                            <% } %>
+                        </header>
+                        <% if(apps[i].attributes.use.description){ %>
+                        <p><em><%= apps[i].attributes.use.description %></em></p>
+                        <% } %>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+    <% }else{ %>
+    <p><em>No apps found for query. Please try again.</em></p>
+    <% } %>
+</div>

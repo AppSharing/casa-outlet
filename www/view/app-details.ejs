@@ -1,0 +1,65 @@
+<div class="app-details">
+
+    <% var attributes = $.extend({}, app.attributes.use, app.attributes.require, app.attributes); %>
+
+    <div style="margin-bottom: 10px;">
+        <a href="#" data-action="close">&larr; Go Back</a>
+    </div>
+
+    <div class="float-right">
+        <div class="icon"></div>
+        <div style="background-color:#363;color:#fff;border-radius: 6px; font-size: 0.8em; font-weight:bold; text-align:center; margin-top: 3px; padding: 2px 0;">Add App</div>
+    </div>
+
+    <h2><%= attributes.title ? strip_tags(attributes.title) : 'Untitled' %></h2>
+
+    <% if(attributes.uri){ %>
+    <p><a href="<%= escapeAttributeValue(attributes.uri) %>" target="_blank">
+            <%= strip_tags(attributes.uri) %></a></p>
+    <% } %>
+
+    <% if(attributes.description){
+        var p = attributes.description.indexOf('<p>') >= 0; %>
+    <%= (p ? '' : '<p>') + strip_tags(attributes.description, ['b','i','strong','em','p']) + (p ? '' : '</p>') %>
+    <% } %>
+
+    <% if(attributes.categories){ %>
+    <p><strong>Categories:</strong> <%= strip_tags(attributes.categories.join(', ')) %></p>
+    <% } %>
+
+    <% if(attributes.author){
+        var authors = $.isArray(attributes.author) ? attributes.author : [attributes.author]
+    %>
+    <p><strong>Author<%= authors.length > 1 ? 's' : '' %></strong>:
+        <%= $.map(authors, function(author){
+            var retval = '';
+            if(author.email) retval += '<a href="mailto:'+escapeAttributeValue(author.email)+'">'
+            retval += strip_tags(author.name);
+            if(author.email) retval += '</a>';
+            return retval;
+        }).join(', ') %>
+    </p>
+    <% } %>
+
+    <% if(attributes.organization){
+        var organizations = $.isArray(attributes.organization) ? attributes.organization : [attributes.organization]
+    %>
+    <p><strong>Organization<%= organizations.length > 1 ? 's' : '' %></strong>:
+        <%= $.map(organizations, function(organization){
+            var retval = '';
+            if(organization.website) retval += '<a href="'+escapeAttributeValue(organization.website)+'" target="_blank">'
+            retval += strip_tags(organization.name);
+            if(organization.website) retval += '</a>';
+            return retval;
+        }).join(', ') %>
+    </p>
+    <% } %>
+
+    <% if(app.attributes.use.tags){ %>
+    <p><strong>Tags:</strong> <%= strip_tags(app.attributes.use.tags.join(', ')) %></p>
+    <% } %>
+
+    <div style="margin-top: 10px;">
+        <a href="#" data-action="close">&larr; Go Back</a>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="app-row">
+    <% if(title){ %>
+    <h2><%= title %></h2>
+    <% } %>
+    <div class="scrollable">
+        <ul>
+            <% for(var i=0; i<apps.length; i++) { %>
+            <li>
+                <a href="#" data-app-details='<%= escapeAttributeValue(JSON.stringify(apps[i])) %>'>
+                    <figure>
+                        <div class="icon"></div>
+                        <figcaption><%= apps[i].attributes.use.title ? apps[i].attributes.use.title : '' %></figcaption>
+                    </figure>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</div>

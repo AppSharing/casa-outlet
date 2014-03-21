@@ -28,6 +28,8 @@
   "dependencies": {
     "efx": "~0.2.4",
     "ejs_production": "http://embeddedjavascript.googlecode.com/files/ejs_1.0_developer.zip",
+    "normalize-css": "~3.0.0",
+    "phpjs": "https://github.com/kvz/phpjs.git",
     "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git#2.1.0"
   },
   "devDependencies": {

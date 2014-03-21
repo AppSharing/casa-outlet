@@ -5,8 +5,11 @@ App.Controller.Query = {
     var $region = $(this),
 
         renderRegion = function(apps, textStatus, jqXHR){
-          $region.html(App.View.make('results', {"apps":apps}));
+          $region.html(App.View.make('results-list', {"apps":apps}));
           App.Controller.Query.attachToForm($region.find('form[data-type="query"]'));
+          $region.find('[data-app-details]').each(function(){
+            App.Controller.Details.attachTo(this);
+          })
         },
 
         throwError = function(jqXHR, textStatus, errorThrown){

@@ -5,10 +5,21 @@ App.Controller.SearchCollection = {
     var $region = $(region),
 
       request = JSON.parse($region.attr('data-'+Engine.Config.Search.type)),
-      viewName = $region.attr('data-collection-view'),
+      viewName = $region.attr('data-view'),
+      title = $region.attr('data-title')
 
       renderRegion = function(apps, textStatus, jqXHR){
-        $region.html(App.View.make('collection/'+viewName, {"apps":apps}));
+        $region.append(App.View.make(viewName, {"apps":apps,"title":title}));
+        $region.find('[data-app-details]').each(function(){
+          App.Controller.Details.attachTo(this);
+        })
+        $region.find('.scrollable ul:not(.one-line)').each(function(){
+          var $this = $(this), width = 0;
+          $this.find('> li > *').each(function(){
+            width += $(this).outerWidth(true);
+          })
+          $this.css('width', width);
+        });
       },
 
       throwError = function(jqXHR, textStatus, errorThrown){

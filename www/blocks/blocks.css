@@ -15,3 +15,679 @@
 [data-toggle~="basic"] [data-toggle~="hide"] {
   display: none;
 }
+
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 9, ../../../bower_components/normalize-css/normalize.css */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+/* line 19, ../../../bower_components/normalize-css/normalize.css */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+/* line 41, ../../../bower_components/normalize-css/normalize.css */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 53, ../../../bower_components/normalize-css/normalize.css */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 63, ../../../bower_components/normalize-css/normalize.css */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9.
+ * Hide the `template` element in IE, Safari, and Firefox < 22.
+ */
+/* line 74, ../../../bower_components/normalize-css/normalize.css */
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 85, ../../../bower_components/normalize-css/normalize.css */
+a {
+  background: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 94, ../../../bower_components/normalize-css/normalize.css */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+/* line 105, ../../../bower_components/normalize-css/normalize.css */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+/* line 114, ../../../bower_components/normalize-css/normalize.css */
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+/* line 122, ../../../bower_components/normalize-css/normalize.css */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+/* line 131, ../../../bower_components/normalize-css/normalize.css */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 140, ../../../bower_components/normalize-css/normalize.css */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 149, ../../../bower_components/normalize-css/normalize.css */
+small, .app-row figure figcaption, .app-list figure figcaption {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 158, ../../../bower_components/normalize-css/normalize.css */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 165, ../../../bower_components/normalize-css/normalize.css */
+sup {
+  top: -0.5em;
+}
+
+/* line 169, ../../../bower_components/normalize-css/normalize.css */
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+/* line 180, ../../../bower_components/normalize-css/normalize.css */
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+/* line 188, ../../../bower_components/normalize-css/normalize.css */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+/* line 199, ../../../bower_components/normalize-css/normalize.css */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 207, ../../../bower_components/normalize-css/normalize.css */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 217, ../../../bower_components/normalize-css/normalize.css */
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+/* line 228, ../../../bower_components/normalize-css/normalize.css */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+/* line 252, ../../../bower_components/normalize-css/normalize.css */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10.
+ */
+/* line 262, ../../../bower_components/normalize-css/normalize.css */
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8+, and Opera
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 274, ../../../bower_components/normalize-css/normalize.css */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 289, ../../../bower_components/normalize-css/normalize.css */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 299, ../../../bower_components/normalize-css/normalize.css */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 308, ../../../bower_components/normalize-css/normalize.css */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 318, ../../../bower_components/normalize-css/normalize.css */
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+/* line 331, ../../../bower_components/normalize-css/normalize.css */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 343, ../../../bower_components/normalize-css/normalize.css */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 353, ../../../bower_components/normalize-css/normalize.css */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 367, ../../../bower_components/normalize-css/normalize.css */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 375, ../../../bower_components/normalize-css/normalize.css */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 386, ../../../bower_components/normalize-css/normalize.css */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9.
+ */
+/* line 395, ../../../bower_components/normalize-css/normalize.css */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 404, ../../../bower_components/normalize-css/normalize.css */
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 415, ../../../bower_components/normalize-css/normalize.css */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 421, ../../../bower_components/normalize-css/normalize.css */
+td,
+th {
+  padding: 0;
+}
+
+/* line 1, ../../../src/app/core.scss */
+a {
+  text-decoration: none;
+  color: #005580;
+}
+/* line 4, ../../../src/app/core.scss */
+a:hover {
+  color: #116690;
+}
+
+/* line 9, ../../../src/app/core.scss */
+body {
+  background-color: #f0f0f0;
+  margin: 20px;
+  font-size: 0.85em;
+}
+/* line 15, ../../../src/app/core.scss */
+body > header {
+  margin-bottom: 15px;
+}
+/* line 19, ../../../src/app/core.scss */
+body > main > nav, body > main > section, body > footer {
+  margin-bottom: 20px;
+}
+/* line 23, ../../../src/app/core.scss */
+body > main {
+  position: relative;
+}
+/* line 27, ../../../src/app/core.scss */
+body > header, body > footer {
+  text-align: center;
+}
+/* line 31, ../../../src/app/core.scss */
+body > header h1 {
+  margin: 0;
+}
+
+/* line 37, ../../../src/app/core.scss */
+h2 {
+  font-size: 1.5em;
+}
+
+/* line 41, ../../../src/app/core.scss */
+h3 {
+  font-size: 1.3em;
+}
+
+/* line 45, ../../../src/app/core.scss */
+h4 {
+  font-size: 1.15em;
+}
+
+/* line 49, ../../../src/app/core.scss */
+figure {
+  margin: 0;
+}
+
+/* line 55, ../../../src/app/core.scss */
+.clearfix:before, .app-row ul:before, .app-list figure:before, .clearfix:after, .app-row ul:after, .app-list figure:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+/* line 59, ../../../src/app/core.scss */
+.clearfix:after, .app-row ul:after, .app-list figure:after {
+  clear: both;
+}
+
+/* line 64, ../../../src/app/core.scss */
+.hide-accessible, form[data-type="query"] label {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* line 70, ../../../src/app/core.scss */
+.float-right {
+  float: right;
+}
+
+/* line 1, ../../../src/app/view/common.scss */
+form[data-type="query"] {
+  text-align: center;
+}
+/* line 5, ../../../src/app/view/common.scss */
+form[data-type="query"] label {
+  display: block;
+}
+/* line 10, ../../../src/app/view/common.scss */
+form[data-type="query"] input[type="search"] {
+  width: 80%;
+  border-radius: 1em;
+  padding: 5px 20px 5px 10px;
+  border: 1px solid #bbb;
+  text-align: center;
+}
+/* line 18, ../../../src/app/view/common.scss */
+form[data-type="query"] input[type="submit"] {
+  margin: 2px 0 0 0;
+  position: absolute;
+  right: 12%;
+  z-index: 10;
+  border: 0;
+  font-size: 1.1em;
+  background: transparent;
+  color: #aaa;
+  padding: 0;
+}
+@media (min-width: 600px) {
+  /* line 31, ../../../src/app/view/common.scss */
+  form[data-type="query"] input[type="search"] {
+    width: 60%;
+  }
+  /* line 32, ../../../src/app/view/common.scss */
+  form[data-type="query"] input[type="submit"] {
+    right: 20.75%;
+  }
+}
+@media (min-width: 800px) {
+  /* line 36, ../../../src/app/view/common.scss */
+  form[data-type="query"] input[type="search"] {
+    width: 40%;
+  }
+  /* line 37, ../../../src/app/view/common.scss */
+  form[data-type="query"] input[type="submit"] {
+    right: 30.1%;
+  }
+}
+
+/* line 42, ../../../src/app/view/common.scss */
+.icon {
+  background-color: #ccc;
+  border-radius: 10px;
+  height: 60px;
+  width: 60px;
+}
+
+/* line 49, ../../../src/app/view/common.scss */
+.scrollable {
+  overflow: scroll;
+}
+
+/* line 53, ../../../src/app/view/common.scss */
+small, .app-row figure figcaption, .app-list figure figcaption {
+  font-size: 0.9em;
+}
+
+/* line 1, ../../../src/app/view/app-row.scss */
+.app-row {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  border-width: 1px 0;
+}
+/* line 10, ../../../src/app/view/app-row.scss */
+.app-row a {
+  margin: 10px 20px 10px 0;
+  display: block;
+  color: #666;
+  float: left;
+}
+/* line 17, ../../../src/app/view/app-row.scss */
+.app-row h2 {
+  margin: 0;
+  color: #222;
+}
+/* line 22, ../../../src/app/view/app-row.scss */
+.app-row ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 29, ../../../src/app/view/app-row.scss */
+.app-row .icon {
+  margin: 0 auto 10px;
+}
+/* line 33, ../../../src/app/view/app-row.scss */
+.app-row figure {
+  padding: 0;
+}
+/* line 36, ../../../src/app/view/app-row.scss */
+.app-row figure figcaption {
+  text-align: center;
+}
+
+/* line 1, ../../../src/app/view/app-list.scss */
+.app-list {
+  padding: 10px 20px;
+  border-radius: 1em;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+/* line 10, ../../../src/app/view/app-list.scss */
+.app-list a {
+  display: block;
+  color: #333;
+}
+/* line 15, ../../../src/app/view/app-list.scss */
+.app-list h2 {
+  margin: 0;
+}
+/* line 19, ../../../src/app/view/app-list.scss */
+.app-list ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+/* line 25, ../../../src/app/view/app-list.scss */
+.app-list figure {
+  margin: 10px 20px 10px 0;
+}
+/* line 30, ../../../src/app/view/app-list.scss */
+.app-list figure .icon {
+  float: left;
+}
+/* line 34, ../../../src/app/view/app-list.scss */
+.app-list figure figcaption {
+  margin: 5px 0 0 72px;
+}
+/* line 38, ../../../src/app/view/app-list.scss */
+.app-list figure figcaption h4 {
+  margin: 0 0 0.2em 0;
+}
+/* line 42, ../../../src/app/view/app-list.scss */
+.app-list figure figcaption p {
+  margin: 0.5em 0;
+}
+
+/* line 1, ../../../src/app/view/app-details.scss */
+.app-details {
+  background: #fff;
+  padding: 20px;
+  border-radius: 1em;
+  border: 1px solid #bbb;
+  margin-bottom: 20px;
+}
