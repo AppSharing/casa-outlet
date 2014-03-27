@@ -1,8 +1,31 @@
 App = {
 
+  Persistence: {
+    type: false,
+    options: {}
+  },
+
   start: function(){
 
+    var type, options;
+
+    if(type = getQueryParameter('type')){
+      sessionStorage.setItem('type', type);
+      if(options = getQueryParameter(type)){
+        sessionStorage.setItem('options', decodeURIComponent(options));
+      }
+    }
+
+    if(type = sessionStorage.getItem('type')){
+      App.Persistence.type = type;
+      if(options = sessionStorage.getItem('options')){
+        App.Persistence.options = JSON.parse(options);
+      }
+    }
+
     App.execute(App.Controller.Landing)
+
+    console.log(App.Persistence)
 
   },
 
@@ -40,6 +63,8 @@ App = {
 
   },
 
-  Controller: {}
+  Controller: {},
+
+  Handler: {}
 
 };

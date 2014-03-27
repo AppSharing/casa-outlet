@@ -691,3 +691,14 @@ small, .app-row figure figcaption, .app-list figure figcaption {
   border: 1px solid #bbb;
   margin-bottom: 20px;
 }
+/* line 9, ../../../src/app/view/app-details.scss */
+.app-details .add-app-button {
+  background-color: #363;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 3px;
+  padding: 2px 0;
+}

@@ -9619,8 +9619,19 @@ return jQuery;
 })(jQuery);
 
 ;
-;var escapeAttributeValue = function(str){
+;function escapeAttributeValue(str){
   return str.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+}
+
+function getQueryParameter(variable){
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == variable)
+      return pair[1];
+  }
+  return false;
 };
 ;(function(){
     
@@ -10174,9 +10185,32 @@ EJS.Helpers.prototype = {
 };
 ;App = {
 
+  Persistence: {
+    type: false,
+    options: {}
+  },
+
   start: function(){
 
+    var type, options;
+
+    if(type = getQueryParameter('type')){
+      sessionStorage.setItem('type', type);
+      if(options = getQueryParameter(type)){
+        sessionStorage.setItem('options', decodeURIComponent(options));
+      }
+    }
+
+    if(type = sessionStorage.getItem('type')){
+      App.Persistence.type = type;
+      if(options = sessionStorage.getItem('options')){
+        App.Persistence.options = JSON.parse(options);
+      }
+    }
+
     App.execute(App.Controller.Landing)
+
+    console.log(App.Persistence)
 
   },
 
@@ -10214,7 +10248,9 @@ EJS.Helpers.prototype = {
 
   },
 
-  Controller: {}
+  Controller: {},
+
+  Handler: {}
 
 };;
 ;App.Config = {
@@ -10232,21 +10268,41 @@ EJS.Helpers.prototype = {
 
   attachTo: function(region){
 
-    var $region = $(region);
+    var $region = $(region), detailsJsonString = $region.attr('data-app-details');
 
     $region.click(function(){
 
       $('main > *').hide();
 
       $('main').prepend(App.View.make('app-details', {
-        "app":JSON.parse($region.attr('data-app-details'))
+        "app":JSON.parse(detailsJsonString)
       }));
 
       $('main .app-details [data-action="close"]').click(function(e){
         e.preventDefault();
         $(this).closest('.app-details').remove();
         $('main > *').show();
-      })
+      });
+
+      $('main .app-details .add-app-button').click(function(e){
+        e.preventDefault();
+        switch(App.Persistence.type){
+          case 'lti':
+            var $form = $(document.createElement('form'))
+              .attr('action', App.Persistence.options['return'])
+              .attr('method', 'POST')
+              .hide();
+            $(document.createElement('textarea'))
+              .attr('name', 'app')
+              .html(detailsJsonString)
+              .appendTo($form);
+            $('body').append($form);
+            $form.submit();
+            break;
+          default:
+            console.error('Undefined App.Persistence.type -- do not know how to add')
+        }
+      });
 
     })
 
