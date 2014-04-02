@@ -85,6 +85,8 @@ module CASA
             :signature_method => @tp.oauth_signature_method
           })
 
+          @parameters['content_items'] = @parameters['content_items'].gsub('"','&quot;').gsub("'", "&#39;")
+
           return erb :return_to_consumer
 
         end
@@ -92,7 +94,7 @@ module CASA
         def generate_parameters(content_item)
 
           params = {
-            'content_item' => generate_content_item(content_item).to_json.gsub('"','&quot;').gsub("'", "&#39;"),
+            'content_items' => generate_content_items(content_item).to_json,
             'oauth_version' => @tp.oauth_version,
             'oauth_nonce' => SecureRandom.hex,
             'oauth_timestamp' => Time.now.to_i,
@@ -107,7 +109,7 @@ module CASA
 
         end
 
-        def generate_content_item(content_item)
+        def generate_content_items(content_item)
           {
             '@context' => 'http://purl.imsglobal.org/ctx/lti/v1/ContentItemPlacement',
             '@graph' => [
