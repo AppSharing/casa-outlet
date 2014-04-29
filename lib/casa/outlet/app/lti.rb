@@ -20,6 +20,10 @@ module CASA
 
         end
 
+        get '/' do
+          redirect to '/index.html'
+        end
+
         post '/lti/launch' do
 
           return erb :error unless authorize!
