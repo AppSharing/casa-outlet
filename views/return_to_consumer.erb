@@ -2,12 +2,16 @@
 <head><title>Demo LTI Tool</title></head>
 <body>
 
-<form action="<%= @tp.content_item_return_url %>" method="post" encType="application/x-www-form-urlencoded">
+<form action="<%= @tp.content_item_return_url %>" method="post" encType="application/x-www-form-urlencoded" id="returnToConsumer">
   <% @parameters.each do |name, value| %>
       <input type="hidden" name="<%= name %>" value="<%= value %>">
   <% end %>
   <input type="submit" value="Click to continue...">
 </form>
+
+<script type="text/javascript">
+document.getElementById("returnToConsumer").submit();
+</script>
 
 </body>
 </html>

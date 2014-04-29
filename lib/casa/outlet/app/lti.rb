@@ -15,7 +15,7 @@ module CASA
           enable :sessions
           set :protection, :except => :frame_options
           set :oauth_creds, {
-            "test" => "secret"
+            "demo" => "secret"
           }
 
         end

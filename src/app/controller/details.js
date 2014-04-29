@@ -18,6 +18,11 @@ App.Controller.Details = {
         $('main > *').show();
       });
 
+      if(!App.Persistence.type){
+        $('main .app-details .add-app-button').hide();
+        console.warn('Add button hidden because no persistence type defined');
+      }
+
       $('main .app-details .add-app-button').click(function(e){
         e.preventDefault();
         switch(App.Persistence.type){
