@@ -21,8 +21,14 @@
                         <header>
                             <h4><%= apps[i].attributes.use.title ? apps[i].attributes.use.title : 'Untitled' %></h4>
                             <% if(apps[i].attributes.use.author){ %>
+                            <% if(typeof apps[i].attributes.use.author != 'array') apps[i].attributes.use.author = [apps[i].attributes.use.author] %>
                             <%= $.map(apps[i].attributes.use.author, function(author){
                                 return author.name ? author.name : 'Anonymous';
+                            }).join(', ') %>
+                            <% }else if(apps[i].attributes.use.organization){ %>
+                            <% if(typeof apps[i].attributes.use.organization != 'array') apps[i].attributes.use.organization = [apps[i].attributes.use.organization] %>
+                            <%= $.map(apps[i].attributes.use.organization, function(organization){
+                                return organization.name ? organization.name : null;
                             }).join(', ') %>
                             <% } %>
                         </header>
