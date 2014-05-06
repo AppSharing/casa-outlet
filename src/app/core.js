@@ -25,8 +25,6 @@ App = {
 
     App.execute(App.Controller.Landing)
 
-    console.log(App.Persistence)
-
   },
 
   execute: function(controller){
